@@ -134,33 +134,33 @@ export default function Dashboard() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border border-primary/10 shadow-xl"
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border border-primary/10 shadow-lg"
         >
-          <div className="card-body p-8">
+          <div className="card-body p-6 lg:p-8">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div className="flex items-center gap-4">
                 <motion.div 
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                  className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25"
+                  transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                  className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md shadow-primary/20"
                 >
-                  <HiSparkles className="w-8 h-8 text-primary-content" />
+                  <HiSparkles className="w-7 h-7 text-primary-content" />
                 </motion.div>
                 <div>
                   <motion.h1 
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.5 }}
-                    className="text-3xl font-bold text-base-content"
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                    className="text-2xl lg:text-3xl font-bold text-base-content"
                   >
                     Welcome back, {session?.user?.name?.split(' ')[0] || 'Developer'}!
                   </motion.h1>
                   <motion.p 
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
+                    transition={{ delay: 0.25, duration: 0.3 }}
                     className="text-base-content/60 mt-1"
                   >
                     Manage your API keys securely and efficiently
@@ -168,17 +168,17 @@ export default function Dashboard() {
                 </div>
               </div>
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
                 className="flex gap-3"
               >
                 <button 
-                  className={`btn btn-outline gap-2 ${isRefreshing ? 'loading' : ''}`}
+                  className={`btn btn-sm lg:btn-md btn-outline gap-2 ${isRefreshing ? 'loading' : ''}`}
                   onClick={handleRefresh}
                   disabled={isRefreshing}
                 >
-                  {!isRefreshing && <HiRefresh className="w-5 h-5" />}
+                  {!isRefreshing && <HiRefresh className="w-4 h-4 lg:w-5 lg:h-5" />}
                   Refresh
                 </button>
                 <AddApiKeyModal onSuccess={refreshKeys} />
@@ -189,10 +189,10 @@ export default function Dashboard() {
 
         {/* Stats Cards */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          transition={{ delay: 0.2, duration: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6"
         >
           {[
             { 
@@ -257,10 +257,10 @@ export default function Dashboard() {
 
         {/* Search and Filters */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="card bg-base-100 shadow-xl border border-base-300"
+          transition={{ delay: 0.3, duration: 0.4 }}
+          className="card bg-base-100 shadow-md border border-base-300"
         >
           <div className="card-body p-6">
             <div className="flex flex-col lg:flex-row gap-4">
@@ -375,92 +375,115 @@ export default function Dashboard() {
 
         {/* API Keys Display */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.3 }}
+          className="relative min-h-[200px]"
         >
-          <AnimatePresence mode="wait">
-            {filteredKeys.length > 0 ? (
-              <motion.div
-                key="keys-grid"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className={
-                  viewMode === 'grid' 
-                    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    : "flex flex-col gap-4"
-                }
+          {filteredKeys.length > 0 ? (
+            <>
+              {/* Grid View */}
+              <div 
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5"
+                style={{ 
+                  opacity: viewMode === 'grid' ? 1 : 0,
+                  position: viewMode === 'grid' ? 'relative' : 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  pointerEvents: viewMode === 'grid' ? 'auto' : 'none',
+                  transition: 'opacity 0.25s ease'
+                }}
               >
-                {filteredKeys.map((apiKey, index) => (
-                  <motion.div
-                    key={apiKey.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05, duration: 0.3 }}
-                  >
+                {filteredKeys.map((apiKey) => (
+                  <div key={`grid-${apiKey.id}`}>
                     <ApiKeyCard
                       apiKey={apiKey}
                       onUpdate={refreshKeys}
-                      viewMode={viewMode}
+                      viewMode="grid"
                     />
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="empty-state"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className="card bg-base-100 shadow-xl border border-base-300"
+              </div>
+              
+              {/* List View */}
+              <div 
+                className="flex flex-col gap-3"
+                style={{ 
+                  opacity: viewMode === 'list' ? 1 : 0,
+                  position: viewMode === 'list' ? 'relative' : 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  pointerEvents: viewMode === 'list' ? 'auto' : 'none',
+                  transition: 'opacity 0.25s ease'
+                }}
               >
-                <div className="card-body text-center py-16">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                    className="w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center"
-                  >
-                    {apiKeys.length === 0 ? (
-                      <HiPlus className="w-12 h-12 text-primary" />
-                    ) : (
-                      <HiSearch className="w-12 h-12 text-primary" />
-                    )}
-                  </motion.div>
-                  
+                {filteredKeys.map((apiKey) => (
+                  <div key={`list-${apiKey.id}`}>
+                    <ApiKeyCard
+                      apiKey={apiKey}
+                      onUpdate={refreshKeys}
+                      viewMode="list"
+                    />
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <motion.div
+              key="empty-state"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="card bg-base-100 shadow-xl border border-base-300"
+            >
+              <div className="card-body text-center py-16">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                  className="w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center"
+                >
                   {apiKeys.length === 0 ? (
-                    <div>
-                      <h3 className="text-3xl font-bold text-base-content mb-4">Your vault is empty</h3>
-                      <p className="text-base-content/60 mb-8 max-w-md mx-auto leading-relaxed">
-                        Get started by adding your first API key to securely store and manage your credentials.
-                      </p>
+                    <HiPlus className="w-12 h-12 text-primary" />
+                  ) : (
+                    <HiSearch className="w-12 h-12 text-primary" />
+                  )}
+                </motion.div>
+                
+                {apiKeys.length === 0 ? (
+                  <div>
+                    <h3 className="text-3xl font-bold text-base-content mb-4">Your vault is empty</h3>
+                    <p className="text-base-content/60 mb-8 max-w-md mx-auto leading-relaxed">
+                      Get started by adding your first API key to securely store and manage your credentials.
+                    </p>
+                    <AddApiKeyModal onSuccess={refreshKeys} />
+                  </div>
+                ) : (
+                  <div>
+                    <h3 className="text-2xl font-bold text-base-content mb-4">No keys match your search</h3>
+                    <p className="text-base-content/60 mb-8">
+                      Try adjusting your search terms or environment filter.
+                    </p>
+                    <div className="flex gap-3 justify-center">
+                      <button 
+                        className="btn btn-outline gap-2"
+                        onClick={clearFilters}
+                      >
+                        <HiX className="w-5 h-5" />
+                        Clear Filters
+                      </button>
                       <AddApiKeyModal onSuccess={refreshKeys} />
                     </div>
-                  ) : (
-                    <div>
-                      <h3 className="text-2xl font-bold text-base-content mb-4">No keys match your search</h3>
-                      <p className="text-base-content/60 mb-8">
-                        Try adjusting your search terms or environment filter.
-                      </p>
-                      <div className="flex gap-3 justify-center">
-                        <button 
-                          className="btn btn-outline gap-2"
-                          onClick={clearFilters}
-                        >
-                          <HiX className="w-5 h-5" />
-                          Clear Filters
-                        </button>
-                        <AddApiKeyModal onSuccess={refreshKeys} />
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </div>
   );
 }
+

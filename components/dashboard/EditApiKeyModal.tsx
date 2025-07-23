@@ -8,15 +8,13 @@ import {
   HiX,
   HiPencil,
   HiKey,
-  HiUser,
   HiServer,
   HiTag,
-  HiInformationCircle,
   HiShieldCheck,
   HiEye,
   HiEyeOff,
-  HiSparkles,
-  HiCheckCircle
+  HiCheckCircle,
+  HiGlobe
 } from 'react-icons/hi';
 
 interface EditApiKeyModalProps {
@@ -122,60 +120,51 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
             onClick={onClose}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
           >
-            <div className="card bg-base-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-base-300">
-              <div className="card-body p-8">
+            <div className="card bg-base-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-base-300" onClick={e => e.stopPropagation()}>
+              <div className="card-body p-6">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-4">
-                    <motion.div 
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                      className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/25"
-                    >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md">
                       <HiPencil className="w-6 h-6 text-primary-content" />
-                    </motion.div>
+                    </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-base-content">Edit API Key</h3>
-                      <p className="text-base-content/60">Update your API key configuration</p>
+                      <h3 className="text-xl font-bold text-base-content">Edit API Key</h3>
+                      <p className="text-base-content/60 text-sm">Update your API key configuration</p>
                     </div>
                   </div>
                   <button
-                    className="btn btn-ghost btn-circle"
+                    className="btn btn-sm btn-ghost btn-circle"
                     onClick={onClose}
                     disabled={loading}
                   >
-                    <HiX className="w-6 h-6" />
+                    <HiX className="w-5 h-5" />
                   </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Basic Info */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
-                      className="form-control"
-                    >
-                      <label className="label">
-                        <span className="label-text font-semibold">Key Name</span>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content">Key Name</span>
                         <span className="label-text-alt text-error">Required</span>
                       </label>
-                      <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
-                        <HiKey className="w-5 h-5 text-base-content/40" />
+                      <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                        <HiKey className="w-4 h-4 text-base-content/40" />
                         <input
                           type="text"
                           name="name"
@@ -187,20 +176,15 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                           required
                         />
                       </label>
-                    </motion.div>
+                    </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                      className="form-control"
-                    >
-                      <label className="label">
-                        <span className="label-text font-semibold">Service</span>
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content">Service</span>
                         <span className="label-text-alt text-error">Required</span>
                       </label>
-                      <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
-                        <HiServer className="w-5 h-5 text-base-content/40" />
+                      <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                        <HiServer className="w-4 h-4 text-base-content/40" />
                         <input
                           type="text"
                           name="service"
@@ -212,73 +196,61 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                           required
                         />
                       </label>
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Environment & Status */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5, duration: 0.5 }}
-                      className="form-control"
-                    >
-                      <label className="label">
-                        <span className="label-text font-semibold">Environment</span>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content">Environment</span>
                       </label>
-                      <select
-                        name="environment"
-                        className="select select-bordered focus:select-primary"
-                        value={formData.environment}
-                        onChange={handleInputChange}
-                        disabled={loading}
-                      >
-                        <option value="development">Development</option>
-                        <option value="staging">Staging</option>
-                        <option value="production">Production</option>
-                      </select>
-                    </motion.div>
+                      <div className="flex w-full items-center">
+                        <HiGlobe className="w-4 h-4 text-base-content/40 absolute ml-3 pointer-events-none" />
+                        <select
+                          name="environment"
+                          className="select select-bordered focus:select-primary w-full pl-9"
+                          value={formData.environment}
+                          onChange={handleInputChange}
+                          disabled={loading}
+                        >
+                          <option value="development">Development</option>
+                          <option value="staging">Staging</option>
+                          <option value="production">Production</option>
+                        </select>
+                      </div>
+                    </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6, duration: 0.5 }}
-                      className="form-control"
-                    >
-                      <label className="label">
-                        <span className="label-text font-semibold">Status</span>
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content">Status</span>
                       </label>
-                      <label className="label cursor-pointer bg-base-200 rounded-lg p-3 border-2 border-transparent hover:border-primary/20 transition-colors">
+                      <label className="label cursor-pointer bg-base-200 rounded-lg p-3 border-2 border-transparent hover:border-primary/20 transition-colors w-full justify-between">
                         <span className="label-text flex items-center gap-2">
-                          <HiCheckCircle className={`w-5 h-5 ${formData.isActive ? 'text-success' : 'text-base-content/40'}`} />
+                          <HiCheckCircle className={`w-4 h-4 ${formData.isActive ? 'text-success' : 'text-base-content/40'}`} />
                           Active Key
                         </span>
                         <input
                           type="checkbox"
                           name="isActive"
-                          className="toggle toggle-success"
+                          className="toggle toggle-success toggle-sm"
                           checked={formData.isActive}
                           onChange={handleInputChange}
                           disabled={loading}
                         />
                       </label>
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Update Key Toggle */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7, duration: 0.5 }}
-                    className="card bg-warning/5 border border-warning/20"
-                  >
+                  <div className="card bg-warning/5 border border-warning/20 w-full">
                     <div className="card-body p-4">
-                      <label className="label cursor-pointer">
+                      <label className="label cursor-pointer w-full justify-between py-0">
                         <div className="flex items-start gap-3">
-                          <HiShieldCheck className="w-5 h-5 text-warning mt-1 flex-shrink-0" />
+                          <HiShieldCheck className="w-5 h-5 text-warning mt-0.5 flex-shrink-0" />
                           <div>
                             <span className="label-text font-semibold text-base-content">Update API Key Value</span>
-                            <p className="text-sm text-base-content/60 mt-1">
+                            <p className="text-xs text-base-content/60 mt-1">
                               Check this only if you want to replace the current API key. Leave unchecked to keep the existing key.
                             </p>
                           </div>
@@ -286,14 +258,14 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                         <input
                           type="checkbox"
                           name="updateKey"
-                          className="checkbox checkbox-warning"
+                          className="checkbox checkbox-warning checkbox-sm"
                           checked={formData.updateKey}
                           onChange={handleInputChange}
                           disabled={loading}
                         />
                       </label>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* API Key Input (conditional) */}
                   <AnimatePresence>
@@ -303,9 +275,9 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="form-control"
+                        className="form-control w-full overflow-hidden"
                       >
-                        <label className="label">
+                        <label className="label py-1">
                           <span className="label-text font-semibold flex items-center gap-2">
                             <HiKey className="w-4 h-4" />
                             New API Key
@@ -315,11 +287,11 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                             Will be encrypted
                           </span>
                         </label>
-                        <div className="relative">
+                        <div className="relative w-full">
                           <textarea
                             name="keyValue"
                             placeholder="Paste your new API key here..."
-                            className="textarea textarea-bordered w-full h-24 font-mono text-sm resize-none focus:textarea-primary"
+                            className="textarea textarea-bordered w-full h-20 font-mono text-sm resize-none focus:textarea-primary bg-base-200 pr-9"
                             value={formData.keyValue}
                             onChange={handleInputChange}
                             disabled={loading}
@@ -329,10 +301,10 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                             className="absolute top-3 right-3 text-base-content/40 hover:text-base-content"
                             onClick={() => setShowNewKey(!showNewKey)}
                           >
-                            {showNewKey ? <HiEyeOff className="w-5 h-5" /> : <HiEye className="w-5 h-5" />}
+                            {showNewKey ? <HiEyeOff className="w-4 h-4" /> : <HiEye className="w-4 h-4" />}
                           </button>
                         </div>
-                        <label className="label">
+                        <label className="label pt-1 pb-0">
                           <span className="label-text-alt text-base-content/60">
                             Your key will be encrypted with AES-256 before storage
                           </span>
@@ -342,102 +314,81 @@ export default function EditApiKeyModal({ apiKey, isOpen, onClose, onSuccess }: 
                   </AnimatePresence>
 
                   {/* Description */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                    className="form-control"
-                  >
-                    <label className="label">
-                      <span className="label-text font-semibold">Description</span>
+                  <div className="form-control w-full">
+                    <label className="label py-1">
+                      <span className="label-text font-semibold text-base-content">Description</span>
                       <span className="label-text-alt text-base-content/60">Optional</span>
                     </label>
                     <textarea
                       name="description"
                       placeholder="What is this key used for? (optional)"
-                      className="textarea textarea-bordered h-20 resize-none focus:textarea-primary"
+                      className="textarea textarea-bordered w-full h-16 resize-none focus:textarea-primary"
                       value={formData.description}
                       onChange={handleInputChange}
                       disabled={loading}
                       maxLength={500}
                     />
-                  </motion.div>
+                  </div>
 
                   {/* Tags */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9, duration: 0.5 }}
-                    className="form-control"
-                  >
-                    <label className="label">
-                      <span className="label-text font-semibold flex items-center gap-2">
+                  <div className="form-control w-full">
+                    <label className="label py-1">
+                      <span className="label-text font-semibold text-base-content flex items-center gap-2">
                         <HiTag className="w-4 h-4" />
                         Tags
                       </span>
                       <span className="label-text-alt text-base-content/60">Comma separated</span>
                     </label>
-                    <input
-                      type="text"
-                      name="tags"
-                      placeholder="e.g., ai, payments, database"
-                      className="input input-bordered focus:input-primary"
-                      value={formData.tags}
-                      onChange={handleInputChange}
-                      disabled={loading}
-                    />
-                    <label className="label">
+                    <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                      <HiTag className="w-4 h-4 text-base-content/40" />
+                      <input
+                        type="text"
+                        name="tags"
+                        placeholder="e.g., ai, payments, database"
+                        className="grow"
+                        value={formData.tags}
+                        onChange={handleInputChange}
+                        disabled={loading}
+                      />
+                    </label>
+                    <label className="label pt-1 pb-0">
                       <span className="label-text-alt text-base-content/60">
                         Tags help organize and filter your keys
                       </span>
                     </label>
-                  </motion.div>
+                  </div>
 
                   {/* Error Message */}
-                  <AnimatePresence>
-                    {error && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="alert alert-error"
-                      >
-                        <HiInformationCircle className="w-5 h-5" />
-                        <span>{error}</span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {error && (
+                    <div className="alert alert-error shadow-sm">
+                      <HiX className="w-5 h-5" />
+                      <span className="text-sm">{error}</span>
+                    </div>
+                  )}
 
                   {/* Actions */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 0.5 }}
-                    className="flex justify-end gap-3 pt-6 border-t border-base-300"
-                  >
+                  <div className="flex justify-end gap-3 pt-4 border-t border-base-300 mt-2">
                     <button
                       type="button"
-                      className="btn btn-outline"
+                      className="btn btn-sm md:btn-md btn-outline"
                       onClick={onClose}
                       disabled={loading}
                     >
                       Cancel
                     </button>
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
                       type="submit"
-                      className={`btn btn-primary shadow-lg gap-2 ${loading ? 'loading' : ''}`}
+                      className={`btn btn-sm md:btn-md btn-primary shadow-md gap-2 ${loading ? 'loading' : ''}`}
                       disabled={loading}
                     >
                       {loading ? 'Updating...' : (
                         <>
-                          <HiCheckCircle className="w-5 h-5" />
+                          <HiCheckCircle className="w-4 h-4" />
                           Update API Key
                         </>
                       )}
-                    </motion.button>
-                  </motion.div>
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>

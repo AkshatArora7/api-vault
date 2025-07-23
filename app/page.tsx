@@ -18,7 +18,6 @@ import {
   HiEye,
   HiKey,
   HiCloud,
-  HiDocumentText,
   HiStar,
   HiArrowDown
 } from 'react-icons/hi';
@@ -33,7 +32,7 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const yReverse = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']); // Fixed: moved here
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
 
   useEffect(() => {
     setMounted(true);

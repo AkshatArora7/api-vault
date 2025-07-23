@@ -7,7 +7,6 @@ import {
   HiMoon,
   HiSparkles,
   HiColorSwatch,
-  HiChevronDown,
   HiCheck
 } from 'react-icons/hi';
 import { themeChange } from 'theme-change';

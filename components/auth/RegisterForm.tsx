@@ -13,7 +13,6 @@ import {
   HiEye, 
   HiEyeOff, 
   HiArrowRight,
-  HiShieldCheck,
   HiCheck,
   HiSparkles
 } from 'react-icons/hi';

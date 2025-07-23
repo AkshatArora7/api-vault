@@ -9,7 +9,8 @@ import {
   HiX,
   HiKey,
   HiGlobe,
-  HiSparkles
+  HiSparkles,
+  HiTag
 } from 'react-icons/hi';
 
 interface AddApiKeyModalProps {
@@ -90,15 +91,13 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
   return (
     <>
       {/* Trigger Button */}
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="btn btn-primary shadow-lg gap-2"
+      <button
+        className="btn btn-sm lg:btn-md btn-primary shadow-lg gap-2"
         onClick={openModal}
       >
-        <HiPlus className="w-5 h-5" />
+        <HiPlus className="w-4 h-4 lg:w-5 lg:h-5" />
         Add API Key
-      </motion.button>
+      </button>
 
       {/* Modal */}
       <AnimatePresence>
@@ -109,85 +108,92 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-40"
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm"
               onClick={closeModal}
             />
 
             {/* Modal */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
             >
-              <div className="card bg-base-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-base-300">
-                <div className="card-body p-8">
+              <div className="card bg-base-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-base-300" onClick={e => e.stopPropagation()}>
+                <div className="card-body p-6">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-md">
                         <HiShieldCheck className="w-6 h-6 text-primary-content" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-base-content">Add New API Key</h3>
-                        <p className="text-base-content/60">Securely store your API credentials</p>
+                        <h3 className="text-xl font-bold text-base-content">Add New API Key</h3>
+                        <p className="text-base-content/60 text-sm">Securely store your API credentials</p>
                       </div>
                     </div>
                     <button
-                      className="btn btn-ghost btn-circle"
+                      className="btn btn-sm btn-ghost btn-circle"
                       onClick={closeModal}
                       disabled={loading}
                     >
-                      <HiX className="w-6 h-6" />
+                      <HiX className="w-5 h-5" />
                     </button>
                   </div>
                   
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     {/* Basic Info */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <div className="form-control">
-                        <label className="label">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      <div className="form-control w-full">
+                        <label className="label py-1">
                           <span className="label-text font-semibold text-base-content">Name</span>
                           <span className="label-text-alt text-error">Required</span>
                         </label>
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="e.g., OpenAI Production Key"
-                          className="input input-bordered input-lg focus:input-primary"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          disabled={loading}
-                          maxLength={100}
-                        />
+                        <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                          <HiKey className="w-4 h-4 text-base-content/40" />
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder="e.g., OpenAI Production Key"
+                            className="grow"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            disabled={loading}
+                            maxLength={100}
+                          />
+                        </label>
                       </div>
 
-                      <div className="form-control">
-                        <label className="label">
+                      <div className="form-control w-full">
+                        <label className="label py-1">
                           <span className="label-text font-semibold text-base-content">Service</span>
                           <span className="label-text-alt text-error">Required</span>
                         </label>
-                        <input
-                          type="text"
-                          name="service"
-                          placeholder="e.g., OpenAI, Stripe, AWS"
-                          className="input input-bordered input-lg focus:input-primary"
-                          value={formData.service}
-                          onChange={handleInputChange}
-                          disabled={loading}
-                          maxLength={50}
-                        />
+                        <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                          <HiGlobe className="w-4 h-4 text-base-content/40" />
+                          <input
+                            type="text"
+                            name="service"
+                            placeholder="e.g., OpenAI, Stripe, AWS"
+                            className="grow"
+                            value={formData.service}
+                            onChange={handleInputChange}
+                            disabled={loading}
+                            maxLength={50}
+                          />
+                        </label>
                       </div>
                     </div>
 
                     {/* Environment */}
-                    <div className="form-control">
-                      <label className="label">
+                    <div className="form-control w-full">
+                      <label className="label py-1">
                         <span className="label-text font-semibold text-base-content">Environment</span>
                         <span className="label-text-alt text-base-content/60">Where will this key be used?</span>
                       </label>
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {[
                           { value: 'development', label: 'Development', icon: HiSparkles, desc: 'For testing and development' },
                           { value: 'staging', label: 'Staging', icon: HiGlobe, desc: 'Pre-production environment' },
@@ -223,23 +229,29 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
                     </div>
 
                     {/* API Key */}
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text font-semibold text-base-content">API Key</span>
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content flex items-center gap-1">
+                          <HiKey className="w-4 h-4" />
+                          API Key
+                        </span>
                         <span className="label-text-alt text-primary flex items-center gap-1">
                           <HiShieldCheck className="w-3 h-3" />
                           Will be encrypted
                         </span>
                       </label>
-                      <textarea
-                        name="keyValue"
-                        placeholder="Paste your API key here..."
-                        className="textarea textarea-bordered textarea-lg h-24 focus:textarea-primary font-mono text-sm resize-none"
-                        value={formData.keyValue}
-                        onChange={handleInputChange}
-                        disabled={loading}
-                      />
-                      <label className="label">
+                      <div className="relative w-full">
+                        <textarea
+                          name="keyValue"
+                          placeholder="Paste your API key here..."
+                          className="textarea textarea-bordered w-full h-20 focus:textarea-primary font-mono text-sm resize-none bg-base-200 pr-9"
+                          value={formData.keyValue}
+                          onChange={handleInputChange}
+                          disabled={loading}
+                          required
+                        />
+                      </div>
+                      <label className="label pt-1 pb-0">
                         <span className="label-text-alt text-base-content/60">
                           Your key will be encrypted with AES-256 before storage
                         </span>
@@ -247,15 +259,15 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
                     </div>
 
                     {/* Description */}
-                    <div className="form-control">
-                      <label className="label">
+                    <div className="form-control w-full">
+                      <label className="label py-1">
                         <span className="label-text font-semibold text-base-content">Description</span>
                         <span className="label-text-alt text-base-content/60">Optional</span>
                       </label>
                       <textarea
                         name="description"
                         placeholder="What is this key used for? (optional)"
-                        className="textarea textarea-bordered h-20 focus:textarea-primary resize-none"
+                        className="textarea textarea-bordered w-full h-16 focus:textarea-primary resize-none"
                         value={formData.description}
                         onChange={handleInputChange}
                         disabled={loading}
@@ -264,21 +276,27 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
                     </div>
 
                     {/* Tags */}
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text font-semibold text-base-content">Tags</span>
+                    <div className="form-control w-full">
+                      <label className="label py-1">
+                        <span className="label-text font-semibold text-base-content flex items-center gap-1">
+                          <HiTag className="w-4 h-4" />
+                          Tags
+                        </span>
                         <span className="label-text-alt text-base-content/60">Comma separated</span>
                       </label>
-                      <input
-                        type="text"
-                        name="tags"
-                        placeholder="e.g., ai, payments, database"
-                        className="input input-bordered input-lg focus:input-primary"
-                        value={formData.tags}
-                        onChange={handleInputChange}
-                        disabled={loading}
-                      />
-                      <label className="label">
+                      <label className="input input-bordered flex items-center gap-2 focus-within:input-primary w-full">
+                        <HiTag className="w-4 h-4 text-base-content/40" />
+                        <input
+                          type="text"
+                          name="tags"
+                          placeholder="e.g., ai, payments, database"
+                          className="grow"
+                          value={formData.tags}
+                          onChange={handleInputChange}
+                          disabled={loading}
+                        />
+                      </label>
+                      <label className="label pt-1 pb-0">
                         <span className="label-text-alt text-base-content/60">
                           Tags help organize and filter your keys
                         </span>
@@ -287,42 +305,34 @@ export default function AddApiKeyModal({ onSuccess }: AddApiKeyModalProps) {
 
                     {/* Error Message */}
                     {error && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="alert alert-error"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>{error}</span>
-                      </motion.div>
+                      <div className="alert alert-error shadow-sm">
+                        <HiX className="w-5 h-5" />
+                        <span className="text-sm">{error}</span>
+                      </div>
                     )}
 
                     {/* Actions */}
-                    <div className="card-actions justify-end pt-6 gap-3">
+                    <div className="flex justify-end pt-4 gap-3 border-t border-base-300 mt-2">
                       <button
                         type="button"
-                        className="btn btn-outline"
+                        className="btn btn-sm md:btn-md btn-outline"
                         onClick={closeModal}
                         disabled={loading}
                       >
                         Cancel
                       </button>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
+                      <button
                         type="submit"
-                        className={`btn btn-primary shadow-lg gap-2 ${loading ? 'loading' : ''}`}
+                        className={`btn btn-sm md:btn-md btn-primary shadow-md gap-2 ${loading ? 'loading' : ''}`}
                         disabled={loading}
                       >
-                        {loading ? 'Adding Key...' : (
+                        {loading ? 'Adding...' : (
                           <>
-                            <HiKey className="w-5 h-5" />
+                            <HiKey className="w-4 h-4" />
                             Add API Key
                           </>
                         )}
-                      </motion.button>
+                      </button>
                     </div>
                   </form>
                 </div>

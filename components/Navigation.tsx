@@ -109,7 +109,7 @@ export default function Navigation({ title = 'API Vault', showBackButton = false
         </div>
       </div>
       
-      <div className="navbar-center hidden lg:flex">
+      {/* <div className="navbar-center hidden lg:flex">
         {session && !isAuthPage && (
           <div className="tabs tabs-boxed bg-base-200 rounded-2xl">
             {navItems.map((item) => {
@@ -131,7 +131,7 @@ export default function Navigation({ title = 'API Vault', showBackButton = false
             })}
           </div>
         )}
-      </div>
+      </div> */}
       
       <div className="navbar-end">
         <div className="flex items-center gap-3">
@@ -147,8 +147,12 @@ export default function Navigation({ title = 'API Vault', showBackButton = false
                 className="btn btn-ghost btn-circle avatar"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-sm font-bold text-primary-content">
-                  {session.user?.name?.[0]?.toUpperCase() || session.user?.email?.[0]?.toUpperCase()}
+                <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                  <div className="flex items-center justify-center w-full h-full">
+                    <span className="text-lg font-extrabold text-white select-none" style={{ marginBottom: '1px' }}>
+                      {session.user?.name?.[0]?.toUpperCase() || session.user?.email?.[0]?.toUpperCase()}
+                    </span>
+                  </div>
                 </div>
               </motion.div>
 
