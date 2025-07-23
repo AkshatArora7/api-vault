@@ -16,34 +16,34 @@
 
 API Vault is a modern, secure, and intuitive web application designed for developers and teams to safely store, manage, and organize their API credentials. Built with enterprise-grade security and a focus on user experience, API Vault provides a centralized solution for API key management with zero-knowledge encryption.
 
-**🚀 [Live Demo](https://api-vault.vercel.app) | 📖 [Documentation](https://docs.api-vault.dev) | 💬 [Discord](https://discord.gg/api-vault)**
+**[Live Demo](https://api-vault.vercel.app) | [Documentation](https://docs.api-vault.dev) | [Discord](https://discord.gg/api-vault)**
 
 ---
 
-## ✨ Features
+## Features
 
-### 🛡️ Security First
+### Security First
 - **AES-256 Encryption** - Military-grade encryption for all stored API keys
 - **Zero-Knowledge Architecture** - Your keys are encrypted client-side before storage
 - **Secure Authentication** - NextAuth.js integration with multiple providers
 - **Role-Based Access Control** - Team collaboration with granular permissions
 - **Audit Logging** - Complete activity tracking and security monitoring
 
-### 🎨 Modern User Experience
+### Modern User Experience
 - **Intuitive Dashboard** - Clean, professional interface built with DaisyUI
 - **Theme System** - 15+ built-in themes with real-time switching
 - **Responsive Design** - Perfect experience across all devices
 - **Smooth Animations** - Framer Motion powered micro-interactions
 - **Progressive Web App** - Installable with offline capabilities
 
-### 🚀 Developer Features
+### Developer Features
 - **Multi-Environment Support** - Separate keys for development, staging, and production
 - **Smart Organization** - Tag-based filtering and advanced search
 - **Quick Access** - One-click key copying with security warnings
 - **Usage Analytics** - Track key usage patterns and access history
 - **Export/Import** - Backup and migrate your key collections
 
-### 🔧 Management Tools
+### Management Tools
 - **Bulk Operations** - Manage multiple keys simultaneously
 - **Expiration Alerts** - Automatic notifications for expiring keys
 - **Team Sharing** - Secure key sharing with temporary access links
@@ -52,7 +52,7 @@ API Vault is a modern, secure, and intuitive web application designed for develo
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technologies |
 |----------|-------------|
@@ -65,36 +65,44 @@ API Vault is a modern, secure, and intuitive web application designed for develo
 | **Deployment** | Vercel, Docker support |
 
 ---
-
-## 📸 Screenshots
+## Dir Structure
 
 <details>
-<summary>🌙 Dark Theme Dashboard</summary>
+<summary>Directory Structure</summary>
+
+![Directory Structure](screenshots/structure.png)
+</details>
+
+
+## Screenshots
+
+<details>
+<summary>Dark Theme Dashboard</summary>
 
 ![Dark Theme Dashboard](screenshots/dashboard-dark.png)
 </details>
 
 <details>
-<summary>☀️ Light Theme Dashboard</summary>
+<summary>Light Theme Dashboard</summary>
 
 ![Light Theme Dashboard](screenshots/dashboard-light.png)
 </details>
 
 <details>
-<summary>🎨 Theme Switcher</summary>
+<summary>Theme Switcher</summary>
 
 ![Theme Switcher](screenshots/theme-switcher.gif)
 </details>
 
 <details>
-<summary>📱 Mobile Responsive</summary>
+<summary>Mobile Responsive</summary>
 
 ![Mobile View](screenshots/mobile-view.png)
 </details>
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - **Node.js 18+**
@@ -146,7 +154,7 @@ ENCRYPTION_KEY="your-32-character-encryption-key"
 
 ---
 
-## 🎯 Usage Guide
+## Usage Guide
 
 ### Getting Started
 1. **Create Account** - Sign up with email or OAuth provider
@@ -168,7 +176,7 @@ ENCRYPTION_KEY="your-32-character-encryption-key"
 
 ---
 
-## 🎨 Customization
+## Customization
 
 ### Available Themes
 API Vault supports 15+ built-in DaisyUI themes:
@@ -190,7 +198,7 @@ API Vault supports 15+ built-in DaisyUI themes:
 
 ---
 
-## 🔧 API Reference
+## API Reference
 
 ### Authentication
 - POST /api/auth/signin # Sign in user
@@ -216,7 +224,7 @@ API Vault supports 15+ built-in DaisyUI themes:
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 1. **Fork this repository**
@@ -225,7 +233,7 @@ API Vault supports 15+ built-in DaisyUI themes:
 4. **Deploy automatically on push**
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -246,16 +254,16 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 - **Husky** - Pre-commit hooks for quality assurance
 
 ### Areas for Contribution
-- 🐛 **Bug fixes** - Help us squash bugs
-- ✨ **New features** - Implement requested features
-- 📚 **Documentation** - Improve docs and examples
-- 🎨 **UI/UX** - Design improvements and themes
-- 🧪 **Testing** - Increase test coverage
-- 🌐 **Translations** - Add internationalization support
+- **Bug fixes** - Help us squash bugs
+- **New features** - Implement requested features
+- **Documentation** - Improve docs and examples
+- **UI/UX** - Design improvements and themes
+- **Testing** - Increase test coverage
+- **Translations** - Add internationalization support
 
 ---
 
-## 📈 Roadmap
+## Roadmap
 
 ### Q1 2025
 - [ ] **Mobile Apps** - React Native iOS/Android apps
@@ -283,7 +291,7 @@ We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) 
 
 ---
 
-## 🛡️ Security
+## Security
 
 ### Reporting Security Issues
 If you discover a security vulnerability, please send an email to aatechax@gmail.com.
@@ -304,6 +312,6 @@ If you discover a security vulnerability, please send an email to aatechax@gmail
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
