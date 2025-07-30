@@ -37,6 +37,7 @@ export default function Navigation({ title = 'API Vault', showBackButton = false
   };
 
   const isAuthPage = pathname?.startsWith('/auth/');
+  const isDashboard = pathname === '/dashboard';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -136,6 +137,17 @@ export default function Navigation({ title = 'API Vault', showBackButton = false
       <div className="navbar-end">
         <div className="flex items-center gap-3">
           <ThemeSwitcher />
+          
+          {session && isDashboard && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleSignOut}
+              className="btn btn-ghost rounded-full text-base-content/70 hover:text-base-content"
+            >
+              <HiLogout className="w-5 h-5" />
+            </motion.button>
+          )}
           
           {session ? (
             <div className="dropdown dropdown-end" onClick={(e) => e.stopPropagation()}>

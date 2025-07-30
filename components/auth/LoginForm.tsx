@@ -104,13 +104,13 @@ export default function LoginForm() {
                   <label className="label">
                     <span className="label-text font-medium">Email Address</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiMail className="w-5 h-5 text-base-content/40" />
                     <input
                       type="email"
                       name="email"
                       placeholder="Enter your email"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -125,13 +125,13 @@ export default function LoginForm() {
                   <label className="label">
                     <span className="label-text font-medium">Password</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiLockClosed className="w-5 h-5 text-base-content/40" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       name="password"
                       placeholder="Enter your password"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.password}
                       onChange={handleInputChange}
                       required

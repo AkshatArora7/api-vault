@@ -129,13 +129,13 @@ export default function RegisterForm() {
                   <label className="label">
                     <span className="label-text font-medium">Full Name</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiUser className="w-5 h-5 text-base-content/40" />
                     <input
                       type="text"
                       name="name"
                       placeholder="Enter your full name"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.name}
                       onChange={handleInputChange}
                       disabled={loading}
@@ -149,13 +149,13 @@ export default function RegisterForm() {
                   <label className="label">
                     <span className="label-text font-medium">Email Address</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiMail className="w-5 h-5 text-base-content/40" />
                     <input
                       type="email"
                       name="email"
                       placeholder="Enter your email"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -169,13 +169,13 @@ export default function RegisterForm() {
                   <label className="label">
                     <span className="label-text font-medium">Password</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiLockClosed className="w-5 h-5 text-base-content/40" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       name="password"
                       placeholder="Create password"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.password}
                       onChange={handleInputChange}
                       required
@@ -197,13 +197,13 @@ export default function RegisterForm() {
                   <label className="label">
                     <span className="label-text font-medium">Confirm Password</span>
                   </label>
-                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary">
+                  <label className="input input-bordered flex items-center gap-3 focus-within:input-primary w-full">
                     <HiCheck className="w-5 h-5 text-base-content/40" />
                     <input
                       type={showConfirmPassword ? 'text' : 'password'}
                       name="confirmPassword"
                       placeholder="Confirm password"
-                      className="grow"
+                      className="grow w-full"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       required
