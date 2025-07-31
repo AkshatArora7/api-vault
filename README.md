@@ -16,7 +16,7 @@
 
 API Vault is a modern, secure, and intuitive web application designed for developers and teams to safely store, manage, and organize their API credentials. Built with enterprise-grade security and a focus on user experience, API Vault provides a centralized solution for API key management with zero-knowledge encryption.
 
-**[Live Demo](https://api-vault.vercel.app) | [Documentation](https://docs.api-vault.dev) | [Discord](https://discord.gg/api-vault)**
+**[Live Demo](https://api-vault.aatechax.com) | [Documentation](https://api-vault.aatechax.com)**
 
 ---
 
